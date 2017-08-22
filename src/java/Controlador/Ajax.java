@@ -1,53 +1,46 @@
+package Controlador;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+
 
 import Modelo.Base_Datos;
 import Modelo.Datos_Basicos;
-import static com.sun.xml.xsom.impl.UName.comparator;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author David
+ * @author crist
  */
-public class Registro extends HttpServlet {
-  
-    Base_Datos bd=new Base_Datos();ArrayList<Object> at = new ArrayList<Object>();
-    
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
+public class Ajax extends HttpServlet {
+ public String getJson(){
+        LinkedList<Datos_Basicos> re = new LinkedList<Datos_Basicos>();
+        Base_Datos bd = new Base_Datos();
+        re =(LinkedList) bd.cargar();
+        return new Gson().toJson(re);
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String boton = request.getParameter("Botones");
-              if (boton.equals("Cargar")) {
-                  at=bd.cargar();
-                  for (int i = 0; i < at.size(); i++) {
-                      out.println(at.get(i)+"\n");
-                  }
-              }
-        }
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println(getJson());
+        out.close();
+        
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -87,7 +80,5 @@ public class Registro extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-   
 
 }

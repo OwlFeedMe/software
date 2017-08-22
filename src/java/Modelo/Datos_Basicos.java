@@ -23,7 +23,8 @@ public class Datos_Basicos {
         }
         return  "name=" + a + ", lastname=" + b + ", promedio=" + promedio + ", genero=" + genero + "\n";
     }
-    
+    private String names;
+    private String lastnames;
     private char[] name;
     private char[] lastname;
     private double promedio;
@@ -34,6 +35,32 @@ public class Datos_Basicos {
         this.lastname = new char[20];
         this.promedio = promedio;
         this.genero = genero;
+        this.names = names;
+        this.lastnames = lastnames;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames() {
+        String z = "";
+        for (int i = 0; i < this.name.length; i++) {
+            z=z+this.name[i];
+        }
+        this.names=z;
+    }
+
+    public String getLastnames() {
+        return lastnames;
+    }
+
+    public void setLastnames() {
+       String x = "";
+        for (int i = 0; i < this.lastname.length; i++) {
+            x=x+this.lastname[i];
+        }
+        this.lastnames=x;
     }
 
     public Datos_Basicos(String name, String lastname, String promedio, String genero) {
@@ -44,7 +71,7 @@ public class Datos_Basicos {
             if (i<b.length) {
               a[i]=b[i];  
             }else{
-                a[i]='\u0000';
+                a[i]=' ';
             }
         }
         
@@ -54,23 +81,16 @@ public class Datos_Basicos {
              if (i<d.length) {
               c[i]=d[i];  
             }else{
-                c[i]='\u0000';
+                c[i]=' ';
             }
         }
         
-//        char[] e=new char[5];
-//       char[] f= promedio.toCharArray();
-//        for (int i = 0; i < 5; i++) {
-//             if (i<f.length) {
-//              e[i]=f[i];  
-//            }else{
-//                e[i]='\u0000';
-//            }
-//        }
+   
         
         this.name = a;
         this.lastname = c;
         this.promedio = Double.valueOf(promedio);
+        
         
         if (genero.equals("Masculino")) {
            this.genero=1;  

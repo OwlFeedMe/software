@@ -15,6 +15,7 @@ import java.util.PriorityQueue;
 import Modelo.Datos_Basicos;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 
 /**
  *
@@ -22,11 +23,11 @@ import java.util.Collections;
  */
 public class Base_Datos {
     
-    private ArrayList<Object> estudiantes;
-    ArrayList colita = new ArrayList<>();
+    private LinkedList<Object> estudiantes;
+    LinkedList colita = new LinkedList<>();
     
     public Base_Datos() {
-        this.estudiantes = new ArrayList<>();
+        this.estudiantes = new LinkedList<>();
     }
     
     public void agregar (Datos_Basicos e){
@@ -61,7 +62,7 @@ public class Base_Datos {
        
     }
     
-    public ArrayList cargar(){
+    public LinkedList cargar(){
         try {
             RandomAccessFile raf = new RandomAccessFile("Estudiantes.txt", "rw");
             long a=raf.length();
@@ -89,7 +90,8 @@ public class Base_Datos {
             
             D.setPromedio(raf.readDouble());
             D.setGenero(raf.readInt());
-            
+            D.setNames();
+            D.setLastnames();
             colita.add(D);
             System.out.println(D.getName());
             System.out.println(D.getLastname());
@@ -117,7 +119,7 @@ public class Base_Datos {
        return colita;
     }
     
-    public ArrayList listar() {
+    public LinkedList listar() {
       return estudiantes;
     }
 
